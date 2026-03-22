@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "notion-db-manager"
+version = "0.1.0"
+description = "CLI tool for reading and writing Notion databases as JSON"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "requests>=2.32.0",
+]
+
+[project.scripts]
+notion-db-manager = "notion_db_manager.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["notion_db_manager*"]

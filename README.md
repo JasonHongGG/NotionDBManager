@@ -29,6 +29,10 @@ NOTION_DB_MANAGER_DATABASE_NAME=Tasks
 notion-db-manager reader export-all --output all.json
 ```
 
+所有相對路徑的 JSON 輸入輸出都會統一走專案根目錄下的 `output/`。
+例如 `--output all.json` 實際會寫到 `output/all.json`；
+`--input all.json` 也會優先從 `output/all.json` 讀取。
+
 參數優先順序是:
 
 1. 命令列參數 `--token` / `--database-name`
@@ -145,12 +149,14 @@ notion-db-manager writer write-rows --token "secret_xxx" --database-name "Tasks"
 ## 專案結構
 
 ```text
-src/notion_db_manager/
+output/                     # 統一收斂 JSON 輸入輸出
+notion_db_manager/
 ├─ cli.py                  # CLI 入口與 command handler
 ├─ constants.py            # 常數與欄位型別設定
 ├─ exceptions.py           # 共用例外
 ├─ models.py               # 核心資料模型
 ├─ json_storage.py         # JSON 讀寫
+├─ paths.py                # output/input 路徑解析
 ├─ notion/
 │  ├─ client.py            # Notion API client
 │  └─ serializers.py       # Notion <-> JSON 轉換
